@@ -32,7 +32,7 @@ jobs:
       - name: CycloneDX Node.js Generate SBOM
         uses: CycloneDX/gh-node-module-generatebom@v1.0.0
         with:
-          path: ./app/http/web-app/package-lock.json
+          path: ./app/http/web-app/
           output: ./bom1.xml
           
       - name:  CycloneDX Python Generate SBOM
