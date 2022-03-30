@@ -32,7 +32,7 @@ jobs:
           output: ./bom1.xml
           
       - name:  CycloneDX Python Generate SBOM
-        run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile -o ./bom2.xml
+        run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.xml
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
