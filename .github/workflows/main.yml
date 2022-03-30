@@ -35,7 +35,7 @@ jobs:
         run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.json --format json
       - name: Upload To DepTrack
         run: |
-          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom?project=e9b8d94e-6410-4623-86e6-48c5f3ec7916" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./bom2.json
+          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d $'{"project": "e9b8d94e-6410-4623-86e6-48c5f3ec7916","bom": "$(cat bom2.json|base64"}'
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: cat ./bom1.json
