@@ -41,7 +41,7 @@ jobs:
         run: |
           openssl base64 -in bom1.xml -out bom3.xml
           cat bom3.xml | tr -d '\n' > bom4.xml
-          echo {\"project\": \"e9b8d94e-6410-4623-86e6-48c5f3ec7916\",\"bom\": \"$(cat bom4.xml)\"} > payload.json
+          echo {\"project\": \"4d61b951-cd32-4eb9-8974-e8b4ed5426b0\",\"bom\": \"$(cat bom4.xml)\"} > payload.json
           cat payload.json
       - name: Upload To DepTrack
         run: |
