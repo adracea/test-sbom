@@ -29,13 +29,17 @@ jobs:
         uses: CycloneDX/gh-node-module-generatebom@v1.0.0
         with:
           path: ./app/http/web-app
-          output: ./bom1.json
+          output: ./bom1.xml
           
       - name:  CycloneDX Python Generate SBOM
-        run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.json --format json
+        run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.xml --format xml
+      - name: base64 encode payload
+        run: |
+          export content=$(cat bom2.xml | base64)
+          echo $content
       - name: Upload To DepTrack
         run: |
-          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d $'{"project": "e9b8d94e-6410-4623-86e6-48c5f3ec7916","bom": "$(cat bom2.json|base64)"}'
+          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d $'{"project": "e9b8d94e-6410-4623-86e6-48c5f3ec7916","bom": "$content"}'
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: cat ./bom1.json
