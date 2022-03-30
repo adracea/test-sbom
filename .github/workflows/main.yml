@@ -33,7 +33,8 @@ jobs:
           
       - name:  CycloneDX Python Generate SBOM
         run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.xml
-          
+      - name: Upload To DepTrack
+        run: curl -X "PUT" "http://188.27.98.244:8080/api/v1/bom" -H 'Content-Type: application/xml' -H 'X-API-Key: ${{ secrets.DEPTRACK_KEY }}' -d @bom2.xml
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: cat ./bom1.xml
