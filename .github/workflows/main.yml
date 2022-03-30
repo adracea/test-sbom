@@ -42,6 +42,16 @@ jobs:
       - name: Upload To DepTrack
         run: |
           curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload.json
+
+      - name: base64 encode payload2
+        run: |
+          openssl base64 -in bom1.xml -out bom3.xml
+          cat bom3.xml | tr -d '\n' > bom4.xml
+          echo {\"project\": \"e9b8d94e-6410-4623-86e6-48c5f3ec7916\",\"bom\": \"$(cat bom4.xml)\"} > payload.json
+          cat payload.json
+      - name: Upload To DepTrack2
+        run: |
+          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload.json
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: cat ./bom1.xml
