@@ -35,7 +35,7 @@ jobs:
         run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.xml --format xml
       - name: base64 encode payload
         run: |
-          cat bom2.xml | base64 >> bom3.xml
+          openssl base64 -i bom2.xml -o bom3.xml
           cat bom3.xml
           echo {\"project\": \"e9b8d94e-6410-4623-86e6-48c5f3ec7916\",\"bom\": \"$(cat bom3.xml)\"} > payload.json
           cat payload.json
