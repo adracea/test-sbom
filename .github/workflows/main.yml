@@ -28,14 +28,14 @@ jobs:
       - name: CycloneDX Node.js Generate SBOM
         uses: CycloneDX/gh-node-module-generatebom@v1.0.0
         with:
-          path: ./app/http/web-app
+          path: ./app/http/web-app/package-lock.json
           output: ./bom1.xml
           
       - name:  CycloneDX Python Generate SBOM
         run: pip install cyclonedx-bom && cyclonedx-py -pip -i ./Pipfile.lock -o ./bom2.xml --format xml
       - name: base64 encode payload
         run: |
-          openssl base64 -in bom2.xml -out bom3.xml
+          openssl base64 -in bom1.xml -out bom3.xml
           cat bom3.xml | tr -d '\n' > bom4.xml
           echo {\"project\": \"e9b8d94e-6410-4623-86e6-48c5f3ec7916\",\"bom\": \"$(cat bom4.xml)\"} > payload.json
           cat payload.json
@@ -45,7 +45,7 @@ jobs:
 
       - name: base64 encode payload2
         run: |
-          openssl base64 -in bom1.xml -out bom3.xml
+          openssl base64 -in bom2.xml -out bom3.xml
           cat bom3.xml | tr -d '\n' > bom4.xml
           echo {\"project\": \"e9b8d94e-6410-4623-86e6-48c5f3ec7916\",\"bom\": \"$(cat bom4.xml)\"} > payload.json
           cat payload.json
