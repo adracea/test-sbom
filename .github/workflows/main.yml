@@ -25,6 +25,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         
+      - name: NPM Install
+        run: |
+          cd ./app/http/web-app
+          npm install
       - name: CycloneDX Node.js Generate SBOM
         uses: CycloneDX/gh-node-module-generatebom@v1.0.0
         with:
