@@ -4,6 +4,7 @@ import glob
 
 ns = {'default':'http://cyclonedx.org/schema/bom/1.3'}
 files = glob.glob("./bom*.xml")
+print("Found the following files:")
 print(files)
 tree = ET.parse(files[0])
 rootComps = []
@@ -22,7 +23,6 @@ for element in rootTools:
     tree.getroot().find('default:metadata',ns).find('default:tools',ns).append(element)
 for element in rootMetaComps:
     tree.getroot().find('default:metadata',ns).append(element)
-print(tree.getroot().find('default:components',ns).findall('default:component',ns))
 tree.write("./finalBom.xml")
 strfile= ""
 with open("./finalBom.xml") as file:
@@ -30,3 +30,4 @@ with open("./finalBom.xml") as file:
     strfile = '<?xml version="1.0" encoding="UTF-8"?>' + strfile
 with open("./finalBom.xml","w") as file:
     file.write(strfile)
+print("Finished merging SBOMs."
