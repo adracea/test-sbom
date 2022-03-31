@@ -4,16 +4,29 @@ import glob
 
 ns = {'default':'http://cyclonedx.org/schema/bom/1.3'}
 files = glob.glob("./bom*.xml")
+print(files)
 tree = ET.parse(files[0])
-rootElems = []
+rootComps = []
+rootTools = []
+rootMetaComps = []
 for fil in files[1:]:
-    rootElems.extend(ET.parse(fil).getroot().find('default:components',ns).findall('default:component',ns))
-for element in rootElems:
+    root1 = ET.parse(fil).getroot().find('default:components',ns).findall('default:component',ns)
+    root2 = ET.parse(fil).getroot().find('default:metadata',ns).find('default:tools',ns).findall('default:tool',ns)
+    root3 = ET.parse(fil).getroot().find('default:metadata',ns).findall('default:component',ns)
+    rootComps.extend(root1)
+    rootTools.extend(root2)
+    rootMetaComps.extend(root3)
+for element in rootComps:
     tree.getroot().find('default:components',ns).append(element)
+for element in rootTools:
+    tree.getroot().find('default:metadata',ns).find('default:tools',ns).append(element)
+for element in rootMetaComps:
+    tree.getroot().find('default:metadata',ns).append(element)
+print(tree.getroot().find('default:components',ns).findall('default:component',ns))
 tree.write("./finalBom.xml")
 strfile= ""
 with open("./finalBom.xml") as file:
-    strfile = file.read().replace("ns0:","")
+    strfile = file.read().replace("ns0:","").replace(":ns0","")
+    strfile = '<?xml version="1.0" encoding="UTF-8"?>' + strfile
 with open("./finalBom.xml","w") as file:
     file.write(strfile)
-print("Finished Merging SBOMs.")
