@@ -30,4 +30,4 @@ with open("./finalBom.xml") as file:
     strfile = '<?xml version="1.0" encoding="UTF-8"?>' + strfile
 with open("./finalBom.xml","w") as file:
     file.write(strfile)
-print("Finished merging SBOMs."
+print("Finished merging SBOMs.")
