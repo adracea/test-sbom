@@ -42,7 +42,7 @@ jobs:
           python mergesboms.py
           openssl base64 -in finalBom.xml -out ibom.xml
           cat ibom.xml | tr -d '\n' > uploadbom.xml
-          echo {\"project\": \"4d61b951-cd32-4eb9-8974-e8b4ed5426b0\",\"bom\": \"$(cat uploadbom.xml)\"} > payload.json
+          echo {\"project\": \"979e1fed-c9b7-4975-a7ab-548afff761a8\",\"bom\": \"$(cat uploadbom.xml)\"} > payload.json
           cat payload.json
       - name: Upload To DepTrack
         run: |
