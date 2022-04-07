@@ -41,7 +41,7 @@ jobs:
         run: |
           wget https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.24.0/cyclonedx-linux-x64 -O cyclonedx-cli
           chmod o+rx cyclonedx-cli
-          ./cyclondedx-cli --help
+          ./cyclonedx-cli --help
       - name: SBOM merge
         # You may pin to the exact commit or the version.
         # uses: adracea/gha-sbomb-merge@9e81600175f32d11111cf4367bebeae456c7a174
