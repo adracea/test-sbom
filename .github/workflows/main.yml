@@ -51,6 +51,11 @@ jobs:
           files: ./bom*.xml
           cdxversion: 1.3
           ofile: ./finalBom.xml
+      - name: cyclonedx-merge
+        run: |
+          ./cyclonedx-cli merge --input-files ./bom1.xml ./bom2.xml --output-file ./sbom_all.xml
+          ./cyclonedx-cli analyze --input-file ./finalBom.xml 
+          ./cyclonedx-cli analyze --input-file ./sbom_all.xml
       - name: base64 encode payload
         run: |
           openssl base64 -in finalBom.xml -out ibom.xml
