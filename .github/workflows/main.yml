@@ -86,3 +86,5 @@ jobs:
         run: cat ./bom2.xml
       - name: Run a one-line script
         run: cat ./finalBom.xml
+      - name: Run a one-line script
+        run: cat ./sbom_all.xml
