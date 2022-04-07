@@ -40,7 +40,7 @@ jobs:
       - name: SBOM merge
         # You may pin to the exact commit or the version.
         # uses: adracea/gha-sbomb-merge@9e81600175f32d11111cf4367bebeae456c7a174
-        uses: adracea/gha-sbomb-merge@rc1.1
+        uses: adracea/gha-sbomb-merge@RC1.1
         with:
           # Patter to find input sbom files: ./bom*.xml 
           files: ./bom*.xml
