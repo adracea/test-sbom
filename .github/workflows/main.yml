@@ -63,13 +63,13 @@ jobs:
           ./cyclonedx-cli analyze --input-file ./sbom_all.xml
       - name: base64 encode payload
         run: |
-          openssl base64 -in finalBom.xml -out ibom.xml
-          cat ibom.xml | tr -d '\n' > uploadbom.xml
-          echo {\"project\": \"979e1fed-c9b7-4975-a7ab-548afff761a8\",\"bom\": \"$(cat uploadbom.xml)\"} > payload.json
-          cat payload.json
+          openssl base64 -in finalBom.xml -out ibom2.xml
+          cat ibom2.xml | tr -d '\n' > uploadbom2.xml
+          echo {\"project\": \"979e1fed-c9b7-4975-a7ab-548afff761a8\",\"bom\": \"$(cat uploadbom2.xml)\"} > payload2.json
+          cat payload2.json
       - name: Upload To DepTrack
         run: |
-          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload.json
+          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload2.json
       
       - name: base64 encode payload
         run: |
