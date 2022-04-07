@@ -53,9 +53,8 @@ jobs:
           echo {\"project\": \"979e1fed-c9b7-4975-a7ab-548afff761a8\",\"bom\": \"$(cat uploadbom.xml)\"} > payload.json
           cat payload.json
       - name: Upload To DepTrack
-          #curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload.json
         run: |
-          echo "Mock Upload to DepTrack"
+          curl -X "PUT" "http://${{secrets.SERVER}}/api/v1/bom" --header "Content-Type: application/json"  --header "X-API-Key: ${{secrets.DEPTRACK_KEY}}" -d @./payload.json
       - name: Run a one-line script
         run: cat ./bom1.xml
       - name: Run a one-line script
