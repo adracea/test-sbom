@@ -1,1 +1,46 @@
+# This is a basic workflow to help you get started with Actions
 
+name: CI2
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        
+      - name: Whitesource Scan
+        # You may pin to the exact commit or the version.
+        # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
+        uses: mercari/Whitesource-Scan-Action@v1.0.0
+        with:
+          # The relevent URL to your orgs WS Server. Can be found under the Integrate tab of your Whitesource dashboard (e.g. https://app-eu.whitesourcesoftware.com/agent).
+          wssUrl: ${{secrets.WSS}}
+          # API key from Whitesource.
+          apiKey: ${{secrets.wssapik}}
+          # Name of the Product that this project falls under.
+          productName: Sbom-test # optional
+          # Name of the Project. Repository name if not set. Default: Repository Name without owner.
+          projectName: test1 # optional
+          # Filename of whitesource configuration if being used (including file path)
+          # configFile: # optional
+          # Filename of a file to run before the scan begins.
+          # extraCommandsFile: # optional
+          # (true/false) Enables Policy violation checks. Still updates inventory and will fail the build when a policy violation is found.
+          # failBuildOnPolicyViolations: # optional
