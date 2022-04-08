@@ -27,6 +27,9 @@ jobs:
       - name: Export WSSUK
         run: |
           echo "export WS_USERKEY=${{secrets.WSSUK}}">test.sh
+      - name: Pipenv
+        run: |
+          sudo apt install pipenv
           
         # echo "export WS_ORGTOKEN=${{secrets.WSSUK}}">test.sh
       - name: Whitesource Scan
