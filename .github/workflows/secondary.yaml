@@ -27,6 +27,8 @@ jobs:
       - name: Export WSSUK
         run: |
           echo "export WS_USERKEY=${{secrets.WSSUK}}">test.sh
+          
+        # echo "export WS_ORGTOKEN=${{secrets.WSSUK}}">test.sh
       - name: Whitesource Scan
         # You may pin to the exact commit or the version.
         # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
