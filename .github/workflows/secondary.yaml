@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Export WSSUK
         run: |
-          echo "export WS_USERKEY=${{secrets.WSSUK}}">test.sh
+          echo "export WS_USERKEY=${{secrets.WSSUK}}\nsudo apt install pipenv">test.sh
       - name: Pipenv
         run: |
           sudo apt install pipenv
