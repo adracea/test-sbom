@@ -24,7 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-        
+      - name: Export WSSUK
+        run: |
+          echo "export WS_USERKEY=${{secrets.WSSUK}}">test.sh
       - name: Whitesource Scan
         # You may pin to the exact commit or the version.
         # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
@@ -41,6 +43,6 @@ jobs:
           # Filename of whitesource configuration if being used (including file path)
           # configFile: # optional
           # Filename of a file to run before the scan begins.
-          # extraCommandsFile: # optional
+          extraCommandsFile: test.sh
           # (true/false) Enables Policy violation checks. Still updates inventory and will fail the build when a policy violation is found.
           # failBuildOnPolicyViolations: # optional
