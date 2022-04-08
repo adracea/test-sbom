@@ -43,7 +43,7 @@ jobs:
           # Name of the Project. Repository name if not set. Default: Repository Name without owner.
           projectName: test1 # optional
           # Filename of whitesource configuration if being used (including file path)
-          # configFile: # optional
+          configFile: ./agent.conf
           # Filename of a file to run before the scan begins.
           extraCommandsFile: test.sh
           # (true/false) Enables Policy violation checks. Still updates inventory and will fail the build when a policy violation is found.
