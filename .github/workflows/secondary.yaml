@@ -35,7 +35,7 @@ jobs:
       - name: Whitesource Scan
         # You may pin to the exact commit or the version.
         # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
-        uses: mercari/Whitesource-Scan-Action@v1.0.0
+        uses: adracea/universalws@master
         with:
           # The relevent URL to your orgs WS Server. Can be found under the Integrate tab of your Whitesource dashboard (e.g. https://app-eu.whitesourcesoftware.com/agent).
           wssUrl: ${{secrets.WSS}}
@@ -46,8 +46,8 @@ jobs:
           # Name of the Project. Repository name if not set. Default: Repository Name without owner.
           projectName: test1 # optional
           # Filename of whitesource configuration if being used (including file path)
-          configFile: ./agent.conf
+          agentConfig: ./agent.conf
           # Filename of a file to run before the scan begins.
-          extraCommandsFile: ./test.sh
+          preRunScript: ./test.sh
           # (true/false) Enables Policy violation checks. Still updates inventory and will fail the build when a policy violation is found.
           # failBuildOnPolicyViolations: # optional
