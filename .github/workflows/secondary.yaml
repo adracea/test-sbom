@@ -5,10 +5,10 @@ name: CI2
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # push:
+  #  branches: [ master ]
+  # pull_request:
+  #  branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -48,6 +48,6 @@ jobs:
           # Filename of whitesource configuration if being used (including file path)
           agentConfig: ./agent.conf
           # Filename of a file to run before the scan begins.
-          preRunScript: ./test.sh
+          preRunFile: ./test.sh
           # (true/false) Enables Policy violation checks. Still updates inventory and will fail the build when a policy violation is found.
           # failBuildOnPolicyViolations: # optional
