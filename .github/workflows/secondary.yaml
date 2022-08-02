@@ -35,7 +35,7 @@ jobs:
       - name: Whitesource Scan
         # You may pin to the exact commit or the version.
         # uses: mercari/Whitesource-Scan-Action@3f1da7a9de1055f39f740a4f4aac24fa928eed30
-        uses: adracea/universalws@master
+        uses: adracea/ad-ws-scan-universal@master
         with:
           # The relevent URL to your orgs WS Server. Can be found under the Integrate tab of your Whitesource dashboard (e.g. https://app-eu.whitesourcesoftware.com/agent).
           wssUrl: ${{secrets.WSS}}
